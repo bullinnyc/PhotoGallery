@@ -9,21 +9,37 @@
 /* Begin PBXBuildFile section */
 		DB233C5B2864951100CD3EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C5A2864951100CD3EEB /* AppDelegate.swift */; };
 		DB233C5D2864951100CD3EEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C5C2864951100CD3EEB /* SceneDelegate.swift */; };
-		DB233C5F2864951100CD3EEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C5E2864951100CD3EEB /* ViewController.swift */; };
 		DB233C622864951100CD3EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB233C602864951100CD3EEB /* Main.storyboard */; };
 		DB233C642864951300CD3EEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB233C632864951300CD3EEB /* Assets.xcassets */; };
 		DB233C672864951300CD3EEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB233C652864951300CD3EEB /* LaunchScreen.storyboard */; };
+		DB233C7928649A6600CD3EEB /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C7728649A6600CD3EEB /* GalleryViewController.swift */; };
+		DB233C7E28649E8500CD3EEB /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C7C28649E8500CD3EEB /* GalleryCollectionViewCell.swift */; };
+		DB233C812864A28600CD3EEB /* GalleryContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C802864A28600CD3EEB /* GalleryContainerViewController.swift */; };
+		DB233C842864A9E700CD3EEB /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C832864A9E700CD3EEB /* ZoomAnimator.swift */; };
+		DB233C862865525F00CD3EEB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C852865525F00CD3EEB /* TabBarViewController.swift */; };
+		DB233C8B28655CA800CD3EEB /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8928655CA800CD3EEB /* ZoomViewController.swift */; };
+		DB233C8E2865709900CD3EEB /* ZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8D2865709900CD3EEB /* ZoomTransition.swift */; };
+		DB233C90286572BD00CD3EEB /* ZoomInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */; };
+		DB8D2A492875D676006F19EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DB8D2A482875D676006F19EB /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DB233C572864951100CD3EEB /* Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB233C5A2864951100CD3EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB233C5C2864951100CD3EEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DB233C5E2864951100CD3EEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DB233C612864951100CD3EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DB233C632864951300CD3EEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB233C662864951300CD3EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB233C682864951300CD3EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB233C7728649A6600CD3EEB /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		DB233C7C28649E8500CD3EEB /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB233C802864A28600CD3EEB /* GalleryContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryContainerViewController.swift; sourceTree = "<group>"; };
+		DB233C832864A9E700CD3EEB /* ZoomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
+		DB233C852865525F00CD3EEB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		DB233C8928655CA800CD3EEB /* ZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
+		DB233C8D2865709900CD3EEB /* ZoomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransition.swift; sourceTree = "<group>"; };
+		DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomInteraction.swift; sourceTree = "<group>"; };
+		DB8D2A482875D676006F19EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +56,7 @@
 		DB233C4E2864951000CD3EEB = {
 			isa = PBXGroup;
 			children = (
+				DB8D2A482875D676006F19EB /* .gitignore */,
 				DB233C592864951100CD3EEB /* Gallery */,
 				DB233C582864951100CD3EEB /* Products */,
 			);
@@ -56,15 +73,70 @@
 		DB233C592864951100CD3EEB /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
-				DB233C5A2864951100CD3EEB /* AppDelegate.swift */,
-				DB233C5C2864951100CD3EEB /* SceneDelegate.swift */,
-				DB233C5E2864951100CD3EEB /* ViewController.swift */,
-				DB233C602864951100CD3EEB /* Main.storyboard */,
-				DB233C632864951300CD3EEB /* Assets.xcassets */,
-				DB233C652864951300CD3EEB /* LaunchScreen.storyboard */,
-				DB233C682864951300CD3EEB /* Info.plist */,
+				DB233C6E286496F700CD3EEB /* ViewControllers */,
+				DB233C7B28649E4400CD3EEB /* Views */,
+				DB233C822864A9D300CD3EEB /* Services */,
+				DB8D2A462875D331006F19EB /* Storyboards */,
+				DB8D2A452875D313006F19EB /* Supporting */,
+				DB8D2A472875D352006F19EB /* Resources */,
 			);
 			path = Gallery;
+			sourceTree = "<group>";
+		};
+		DB233C6E286496F700CD3EEB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C852865525F00CD3EEB /* TabBarViewController.swift */,
+				DB233C7728649A6600CD3EEB /* GalleryViewController.swift */,
+				DB233C802864A28600CD3EEB /* GalleryContainerViewController.swift */,
+				DB233C8928655CA800CD3EEB /* ZoomViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DB233C7B28649E4400CD3EEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C7C28649E8500CD3EEB /* GalleryCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB233C822864A9D300CD3EEB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C832864A9E700CD3EEB /* ZoomAnimator.swift */,
+				DB233C8D2865709900CD3EEB /* ZoomTransition.swift */,
+				DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		DB8D2A452875D313006F19EB /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C5A2864951100CD3EEB /* AppDelegate.swift */,
+				DB233C5C2864951100CD3EEB /* SceneDelegate.swift */,
+				DB233C682864951300CD3EEB /* Info.plist */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		DB8D2A462875D331006F19EB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C602864951100CD3EEB /* Main.storyboard */,
+				DB233C652864951300CD3EEB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		DB8D2A472875D352006F19EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DB233C632864951300CD3EEB /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8D2A492875D676006F19EB /* .gitignore in Resources */,
 				DB233C672864951300CD3EEB /* LaunchScreen.storyboard in Resources */,
 				DB233C642864951300CD3EEB /* Assets.xcassets in Resources */,
 				DB233C622864951100CD3EEB /* Main.storyboard in Resources */,
@@ -138,8 +211,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB233C5F2864951100CD3EEB /* ViewController.swift in Sources */,
+				DB233C862865525F00CD3EEB /* TabBarViewController.swift in Sources */,
+				DB233C8B28655CA800CD3EEB /* ZoomViewController.swift in Sources */,
+				DB233C8E2865709900CD3EEB /* ZoomTransition.swift in Sources */,
+				DB233C7E28649E8500CD3EEB /* GalleryCollectionViewCell.swift in Sources */,
+				DB233C7928649A6600CD3EEB /* GalleryViewController.swift in Sources */,
+				DB233C842864A9E700CD3EEB /* ZoomAnimator.swift in Sources */,
+				DB233C812864A28600CD3EEB /* GalleryContainerViewController.swift in Sources */,
 				DB233C5B2864951100CD3EEB /* AppDelegate.swift in Sources */,
+				DB233C90286572BD00CD3EEB /* ZoomInteraction.swift in Sources */,
 				DB233C5D2864951100CD3EEB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,12 +369,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BZ37T979L3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Gallery/Info.plist;
+				INFOPLIST_FILE = Gallery/Supporting/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,12 +398,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BZ37T979L3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Gallery/Info.plist;
+				INFOPLIST_FILE = Gallery/Supporting/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
