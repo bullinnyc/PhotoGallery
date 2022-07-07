@@ -18,9 +18,9 @@ class GalleryViewController: UIViewController {
     // MARK: - Private Properties
     private var images: [UIImage] = []
     private var selectedIndexPath: IndexPath!
-    
     private var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private var rowsSpacing: CGFloat = 2
+    
     private var horizontalRowsCount: CGFloat {
         if UIDevice.current.orientation.isLandscape { return 5 }
         

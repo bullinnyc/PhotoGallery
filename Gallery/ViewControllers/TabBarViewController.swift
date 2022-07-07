@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
             createNavigationController(
                 viewController: galleryViewController,
                 title: "Gallery",
-                image: UIImage(systemName: "photo.fill") ?? UIImage()
+                image: UIImage(systemName: "photo.fill.on.rectangle.fill") ?? UIImage()
             )
         ]
     }

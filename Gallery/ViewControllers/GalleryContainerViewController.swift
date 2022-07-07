@@ -207,7 +207,6 @@ extension GalleryContainerViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             let velocity = gestureRecognizer.velocity(in: view)
-            
             var velocityCheck = false
             
             if UIDevice.current.orientation.isLandscape {
