@@ -19,6 +19,14 @@ class GalleryViewController: UIViewController {
     private var images: [UIImage] = []
     private var selectedIndexPath: IndexPath!
     
+    private var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    private var rowsSpacing: CGFloat = 2
+    private var horizontalRowsCount: CGFloat {
+        if UIDevice.current.orientation.isLandscape { return 5 }
+        
+        return 3
+    }
+    
     // MARK: - Deinitializers
     deinit {
         print("**** DEINIT: \(self)")
@@ -126,6 +134,35 @@ extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         performSegue(withIdentifier: "ShowGalleryContainerView", sender: self)
+    }
+}
+
+// MARK: - Ext. UICollectionViewDelegateFlowLayout
+extension GalleryViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemPadding = max(0, horizontalRowsCount - 1) * rowsSpacing
+        let availableWidth = collectionView.bounds.width - itemPadding - sectionInsets.left - sectionInsets.right
+        let widthPerItem = availableWidth / horizontalRowsCount
+        let heightPerItem = widthPerItem
+        
+        return CGSize(width: widthPerItem, height: heightPerItem)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(
+            top: sectionInsets.top,
+            left: sectionInsets.left,
+            bottom: sectionInsets.bottom,
+            right: sectionInsets.right
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return rowsSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return rowsSpacing
     }
 }
 
