@@ -32,6 +32,14 @@ class TabBarViewController: UITabBarController {
     }
     
     private func createNavigationController(viewController: UIViewController, title: String, image: UIImage) -> UIViewController {
+        // White translucent navigation bar, supports dark appearance
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithDefaultBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.tabBarItem.title = title
         navigationController.tabBarItem.image = image
