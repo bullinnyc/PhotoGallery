@@ -101,9 +101,9 @@ class GalleryViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        for _ in 0..<8 {
-            images.append(UIImage(named: "Moscow")!)
-            images.append(UIImage(named: "NewYork")!)
+        for number in 1..<19 {
+            guard let image = UIImage(named: "\(number)") else { return }
+            images.append(image)
         }
     }
 }
