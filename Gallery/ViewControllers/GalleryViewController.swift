@@ -11,10 +11,6 @@ class GalleryViewController: UIViewController {
     // MARK: - IB Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // MARK: - Public Properties
-    var currentLeftSafeAreaInset: CGFloat = 0
-    var currentRightSafeAreaInset: CGFloat = 0
-    
     // MARK: - Private Properties
     private var images: [UIImage] = []
     private var selectedIndexPath: IndexPath!
@@ -46,11 +42,6 @@ class GalleryViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewSafeAreaInsetsDidChange() {
-        currentLeftSafeAreaInset = view.safeAreaInsets.left
-        currentRightSafeAreaInset = view.safeAreaInsets.right
-    }
-    
     override func viewWillLayoutSubviews() {
         view.frame = CGRect(
             origin: CGPoint(x: 0, y: 0),
@@ -68,21 +59,12 @@ class GalleryViewController: UIViewController {
         let navigationBarHeight: CGFloat = navigationController?.navigationBar.frame.height ?? 0
         let tabBarHeight = tabBarController?.tabBar.frame.height ?? 0
         
-        if UIDevice.current.orientation.isLandscape {
-            collectionView.contentInset = UIEdgeInsets(
-                top: (navigationBarHeight) + statusBarHeight,
-                left: currentLeftSafeAreaInset,
-                bottom: tabBarHeight,
-                right: currentRightSafeAreaInset
-            )
-        } else {
-            collectionView.contentInset = UIEdgeInsets(
-                top: (navigationBarHeight) + statusBarHeight,
-                left: 0,
-                bottom: tabBarHeight,
-                right: 0
-            )
-        }
+        collectionView.contentInset = UIEdgeInsets(
+            top: (navigationBarHeight) + statusBarHeight,
+            left: 0,
+            bottom: tabBarHeight,
+            right: 0
+        )
     }
     
     // MARK: - Navigation

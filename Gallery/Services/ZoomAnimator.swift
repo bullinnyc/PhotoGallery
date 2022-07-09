@@ -45,7 +45,7 @@ class ZoomAnimator: NSObject {
         toReferenceImageView.isHidden = true
         containerView.addSubview(toViewController.view)
         
-        let referenceImage = fromReferenceImageView.image!
+        guard let referenceImage = fromReferenceImageView.image else { return }
         
         if transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
@@ -59,7 +59,10 @@ class ZoomAnimator: NSObject {
         
         fromReferenceImageView.isHidden = true
         
-        let finalTransitionSize = calculateZoomInImageFrame(image: referenceImage, forView: toViewController.view)
+        let finalTransitionSize = calculateZoomInImageFrame(
+            image: referenceImage,
+            forView: toViewController.view
+        )
         
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),

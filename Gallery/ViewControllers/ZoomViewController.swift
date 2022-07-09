@@ -54,13 +54,6 @@ class ZoomViewController: UIViewController {
         updateZoomScaleForSize(view.bounds.size)
     }
     
-    override func viewSafeAreaInsetsDidChange() {
-        guard let parentViewController = navigationController?.viewControllers.first as? GalleryViewController else { return }
-        
-        parentViewController.currentLeftSafeAreaInset = view.safeAreaInsets.left
-        parentViewController.currentRightSafeAreaInset = view.safeAreaInsets.right
-    }
-    
     // MARK: - Private Methods
     private func setupUI() {
         scrollView.delegate = self
