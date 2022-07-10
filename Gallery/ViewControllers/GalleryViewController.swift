@@ -16,7 +16,6 @@ class GalleryViewController: UIViewController {
     private var selectedIndexPath: IndexPath!
     private var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private var rowsSpacing: CGFloat = 2
-    private var itemSize: CGSize!
     
     private var horizontalRowsCount: CGFloat {
         if UIDevice.current.orientation.isLandscape { return 5 }
@@ -43,12 +42,6 @@ class GalleryViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        setCollectionViewContentInsets()
-    }
-    
     override func viewWillLayoutSubviews() {
         view.frame = CGRect(
             origin: CGPoint(x: 0, y: 0),
@@ -63,6 +56,12 @@ class GalleryViewController: UIViewController {
         setCollectionViewContentInsets()
         collectionView.collectionViewLayout.invalidateLayout()
         setScrollToItem()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setCollectionViewContentInsets()
     }
     
     // MARK: - Navigation
@@ -92,12 +91,12 @@ class GalleryViewController: UIViewController {
     
     private func setCollectionViewContentInsets() {
         let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let navigationBarHeight: CGFloat = navigationController?.navigationBar.frame.height ?? 0
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
         let tabBarHeight = tabBarController?.tabBar.frame.height ?? 0
         
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.contentInset = UIEdgeInsets(
-            top: (navigationBarHeight) + statusBarHeight,
+            top: navigationBarHeight + statusBarHeight,
             left: 0,
             bottom: tabBarHeight,
             right: 0
@@ -138,21 +137,16 @@ extension GalleryViewController: UICollectionViewDelegate {
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemPadding = max(0, horizontalRowsCount - 1) * rowsSpacing
-        let availableWidth = collectionView.bounds.width - itemPadding - sectionInsets.left - sectionInsets.right
+        let sumSectionInset = sectionInsets.left + sectionInsets.right
+        let availableWidth = collectionView.bounds.width - itemPadding - sumSectionInset
         let widthPerItem = availableWidth / horizontalRowsCount
         let heightPerItem = widthPerItem
         
-        itemSize = CGSize(width: widthPerItem, height: heightPerItem)
-        return itemSize
+        return CGSize(width: widthPerItem, height: heightPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(
-            top: sectionInsets.top,
-            left: sectionInsets.left,
-            bottom: sectionInsets.bottom,
-            right: sectionInsets.right
-        )
+        return sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -196,7 +190,10 @@ extension GalleryViewController: ZoomAnimatorDelegate {
         view.layoutIfNeeded()
         collectionView.layoutIfNeeded()
         
-        let unconvertedFrame = getFrameFromCollectionViewCell(for: selectedIndexPath)
+        guard let unconvertedFrame = getFrameFromCollectionViewCell(
+            for: selectedIndexPath
+        ) else { return nil }
+        
         let cellFrame = collectionView.convert(unconvertedFrame, to: view)
         
         if cellFrame.minY < collectionView.contentInset.top {
@@ -232,47 +229,20 @@ extension GalleryViewController: ZoomAnimatorDelegate {
         }
     }
     
-    private func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
-        let visibleCells = collectionView.indexPathsForVisibleItems
+    private func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView? {
+        guard let cell = getVisibleCell(
+            for: selectedIndexPath
+        ) as? GalleryCollectionViewCell else { return nil }
         
-        if !visibleCells.contains(selectedIndexPath) {
-            collectionView.scrollToItem(
-                at: selectedIndexPath,
-                at: .centeredVertically,
-                animated: false
-            )
-            
-            collectionView.layoutIfNeeded()
-            
-            guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? GalleryCollectionViewCell else {
-                return UIImageView(
-                    frame: CGRect(
-                        x: UIScreen.main.bounds.midX,
-                        y: UIScreen.main.bounds.midY,
-                        width: itemSize.width,
-                        height: itemSize.height
-                    )
-                )
-            }
-            
-            return cell.imageView
-        } else {
-            guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? GalleryCollectionViewCell else {
-                return UIImageView(
-                    frame: CGRect(
-                        x: UIScreen.main.bounds.midX,
-                        y: UIScreen.main.bounds.midY,
-                        width: itemSize.width,
-                        height: itemSize.height
-                    )
-                )
-            }
-            
-            return cell.imageView
-        }
+        return cell.imageView
     }
     
-    private func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
+    private func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect? {
+        guard let cell = getVisibleCell(for: selectedIndexPath) else { return nil }
+        return cell.frame
+    }
+    
+    private func getVisibleCell(for selectedIndexPath: IndexPath) -> UICollectionViewCell? {
         let visibleCells = collectionView.indexPathsForVisibleItems
         
         if !visibleCells.contains(selectedIndexPath) {
@@ -283,28 +253,12 @@ extension GalleryViewController: ZoomAnimatorDelegate {
             )
             
             collectionView.layoutIfNeeded()
-            
-            guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? GalleryCollectionViewCell else {
-                return CGRect(
-                    x: UIScreen.main.bounds.midX,
-                    y: UIScreen.main.bounds.midY,
-                    width: itemSize.width,
-                    height: itemSize.height
-                )
-            }
-            
-            return cell.frame
-        } else {
-            guard let cell = collectionView.cellForItem(at: selectedIndexPath) as? GalleryCollectionViewCell else {
-                return CGRect(
-                    x: UIScreen.main.bounds.midX,
-                    y: UIScreen.main.bounds.midY,
-                    width: itemSize.width,
-                    height: itemSize.height
-                )
-            }
-            
-            return cell.frame
         }
+        
+        guard let cell = collectionView.cellForItem(
+            at: selectedIndexPath
+        ) as? GalleryCollectionViewCell else { return nil }
+        
+        return cell
     }
 }
