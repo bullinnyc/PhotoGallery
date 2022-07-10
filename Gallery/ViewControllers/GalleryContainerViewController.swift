@@ -26,6 +26,7 @@ class GalleryContainerViewController: UIViewController {
     var images: [UIImage]!
     var currentIndex = 0
     let transitionController = ZoomTransition()
+    var callback: (() -> Void)!
     
     weak var delegate: GalleryContainerViewControllerDelegate!
     
@@ -77,6 +78,12 @@ class GalleryContainerViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        callback()
     }
     
     // MARK: - Private Methods
