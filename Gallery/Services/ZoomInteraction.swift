@@ -59,7 +59,10 @@ class ZoomInteraction: NSObject {
         fromViewController.view.alpha = backgroundAlpha
         transitionImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         
-        let newCenter = CGPoint(x: anchorPoint.x + translatedPoint.x, y: anchorPoint.y + translatedPoint.y - transitionImageView.frame.height * (1 - scale) * 0.5)
+        let newCenter = CGPoint(
+            x: anchorPoint.x + translatedPoint.x,
+            y: anchorPoint.y + translatedPoint.y - transitionImageView.frame.height * (1 - scale) * 0.5
+        )
         
         transitionImageView.center = newCenter
         toReferenceImageView.isHidden = true
@@ -109,7 +112,6 @@ class ZoomInteraction: NSObject {
                     fromViewController.view.alpha = 0
                     transitionImageView.frame = finalTransitionSize
                     toViewController.tabBarController?.tabBar.alpha = 1
-                    
                 },
                 completion: { _ in
                     transitionImageView.removeFromSuperview()
@@ -133,17 +135,17 @@ class ZoomInteraction: NSObject {
         let maximumDelta = view.bounds.height / 4
         let deltaAsPercentageOfMaximun = min(abs(verticalDelta) / maximumDelta, 1)
         
-        return startingAlpha - (deltaAsPercentageOfMaximun * totalAvailableAlpha)
+        return startingAlpha - deltaAsPercentageOfMaximun * totalAvailableAlpha
     }
     
     private func scaleFor(view: UIView, withPanningVerticalDelta verticalDelta: CGFloat) -> CGFloat {
-        let startingScale:CGFloat = 1
+        let startingScale: CGFloat = 1
         let finalScale: CGFloat = 0.5
         let totalAvailableScale = startingScale - finalScale
         let maximumDelta = view.bounds.height * 0.5
         let deltaAsPercentageOfMaximun = min(abs(verticalDelta) / maximumDelta, 1)
         
-        return startingScale - (deltaAsPercentageOfMaximun * totalAvailableScale)
+        return startingScale - deltaAsPercentageOfMaximun * totalAvailableScale
     }
 }
 
@@ -170,7 +172,10 @@ extension ZoomInteraction: UIViewControllerInteractiveTransitioning {
         
         let referenceImage = fromReferenceImageView.image
         
-        containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
+        containerView.insertSubview(
+            toViewController.view,
+            belowSubview: fromViewController.view
+        )
         
         if animator.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)

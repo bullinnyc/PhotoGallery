@@ -49,8 +49,6 @@ class ZoomViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
         updateZoomScaleForSize(view.bounds.size)
     }
     
