@@ -22,6 +22,10 @@ class GalleryContainerViewController: UIViewController {
         hideStatusBar
     }
     
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
+    }
+    
     // MARK: - Public Properties
     var images: [UIImage]!
     var currentIndex = 0
@@ -78,6 +82,12 @@ class GalleryContainerViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        if currentMode == .full {
+            hideStatusBar = true
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
