@@ -112,8 +112,8 @@ class ZoomViewController: UIViewController {
         
         let width = scrollView.bounds.width / newZoomScale
         let height = scrollView.bounds.height / newZoomScale
-        let originX = pointInView.x - (width * 0.5)
-        let originY = pointInView.y - (height * 0.5)
+        let originX = pointInView.x - width * 0.5
+        let originY = pointInView.y - height * 0.5
         let rectToZoomTo = CGRect(x: originX, y: originY, width: width, height: height)
         
         scrollView.zoom(to: rectToZoomTo, animated: true)

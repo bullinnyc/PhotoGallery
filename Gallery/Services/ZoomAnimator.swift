@@ -117,7 +117,11 @@ class ZoomAnimator: NSObject {
             self.transitionImageView = transitionImageView
         }
         
-        containerView.insertSubview(toViewController.view, belowSubview: fromViewController.view)
+        containerView.insertSubview(
+            toViewController.view,
+            belowSubview: fromViewController.view
+        )
+        
         fromReferenceImageView.isHidden = true
         
         let finalTransitionSize = toReferenceImageViewFrame

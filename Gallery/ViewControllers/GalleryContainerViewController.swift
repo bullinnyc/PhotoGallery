@@ -29,8 +29,8 @@ class GalleryContainerViewController: UIViewController {
     // MARK: - Public Properties
     var images: [UIImage]!
     var currentIndex = 0
-    let transitionController = ZoomTransition()
     var callback: (() -> Void)!
+    let transitionController = ZoomTransition()
     
     weak var delegate: GalleryContainerViewControllerDelegate!
     

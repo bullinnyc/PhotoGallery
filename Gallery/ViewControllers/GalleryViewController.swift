@@ -201,7 +201,7 @@ extension GalleryViewController: ZoomAnimatorDelegate {
                 x: cellFrame.minX,
                 y: collectionView.contentInset.top,
                 width: cellFrame.width,
-                height: cellFrame.height - (collectionView.contentInset.top - cellFrame.minY)
+                height: cellFrame.height - collectionView.contentInset.top - cellFrame.minY
             )
         }
         
