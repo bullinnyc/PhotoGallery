@@ -78,7 +78,7 @@ class ZoomAnimator: NSObject {
             delay: 0,
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 0,
-            options: [UIView.AnimationOptions.transitionCrossDissolve],
+            options: [.transitionCrossDissolve],
             animations: {
                 self.transitionImageView?.frame = finalTransitionSize
                 toViewController.view.alpha = 1
