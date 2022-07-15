@@ -27,6 +27,15 @@ class ZoomAnimator: NSObject {
         print("**** DEINIT: \(self)")
     }
     
+    // MARK: - Public Methods
+    func getTransitionImageView(image: UIImage, frame: CGRect) -> UIImageView {
+        let transitionImageView = UIImageView(image: image)
+        transitionImageView.contentMode = .scaleAspectFill
+        transitionImageView.clipsToBounds = true
+        transitionImageView.frame = frame
+        return transitionImageView
+    }
+    
     // MARK: - Private Methods
     private func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
@@ -48,12 +57,12 @@ class ZoomAnimator: NSObject {
         guard let referenceImage = fromReferenceImageView.image else { return }
         
         if transitionImageView == nil {
-            let transitionImageView = UIImageView(image: referenceImage)
-            transitionImageView.contentMode = .scaleAspectFill
-            transitionImageView.clipsToBounds = true
-            transitionImageView.frame = fromReferenceImageViewFrame
+            let transitionImageView = getTransitionImageView(
+                image: referenceImage,
+                frame: fromReferenceImageViewFrame
+            )
+
             containerView.addSubview(transitionImageView)
-            
             self.transitionImageView = transitionImageView
         }
         
@@ -105,15 +114,15 @@ class ZoomAnimator: NSObject {
         
         toReferenceImageView.isHidden = true
         
-        let referenceImage = fromReferenceImageView.image
+        guard let referenceImage = fromReferenceImageView.image else { return }
         
         if transitionImageView == nil {
-            let transitionImageView = UIImageView(image: referenceImage)
-            transitionImageView.contentMode = .scaleAspectFill
-            transitionImageView.clipsToBounds = true
-            transitionImageView.frame = fromReferenceImageViewFrame
-            containerView.addSubview(transitionImageView)
+            let transitionImageView = getTransitionImageView(
+                image: referenceImage,
+                frame: fromReferenceImageViewFrame
+            )
             
+            containerView.addSubview(transitionImageView)
             self.transitionImageView = transitionImageView
         }
         
@@ -124,7 +133,9 @@ class ZoomAnimator: NSObject {
         
         fromReferenceImageView.isHidden = true
         
-        let finalTransitionSize = toReferenceImageViewFrame
+        let finalTransitionSize = toDelegate.referenceImageViewFrameInTransitioningView(
+            for: self
+        ) ?? toReferenceImageViewFrame
         
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
