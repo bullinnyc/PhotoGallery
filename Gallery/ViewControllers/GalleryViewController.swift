@@ -38,7 +38,6 @@ class GalleryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -54,8 +53,8 @@ class GalleryViewController: UIViewController {
         )
         
         setCollectionViewContentInsets()
-        collectionView.collectionViewLayout.invalidateLayout()
         setScrollToItem()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
