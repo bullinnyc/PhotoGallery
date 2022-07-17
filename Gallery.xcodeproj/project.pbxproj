@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB21FFC22882C42800529590 /* AccessPhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21FFC12882C42800529590 /* AccessPhotoLibraryManager.swift */; };
+		DB21FFC62883AB9900529590 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21FFC52883AB9900529590 /* PhotoManager.swift */; };
+		DB21FFC9288452BD00529590 /* Extension + CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21FFC8288452BD00529590 /* Extension + CGSize.swift */; };
 		DB233C5B2864951100CD3EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C5A2864951100CD3EEB /* AppDelegate.swift */; };
 		DB233C5D2864951100CD3EEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C5C2864951100CD3EEB /* SceneDelegate.swift */; };
 		DB233C622864951100CD3EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB233C602864951100CD3EEB /* Main.storyboard */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB21FFC12882C42800529590 /* AccessPhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessPhotoLibraryManager.swift; sourceTree = "<group>"; };
+		DB21FFC52883AB9900529590 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
+		DB21FFC8288452BD00529590 /* Extension + CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CGSize.swift"; sourceTree = "<group>"; };
 		DB233C572864951100CD3EEB /* Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB233C5A2864951100CD3EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB233C5C2864951100CD3EEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB21FFC72884529900529590 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DB21FFC8288452BD00529590 /* Extension + CGSize.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DB233C4E2864951000CD3EEB = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +90,7 @@
 				DB233C6E286496F700CD3EEB /* ViewControllers */,
 				DB233C7B28649E4400CD3EEB /* Views */,
 				DB233C822864A9D300CD3EEB /* Services */,
+				DB21FFC72884529900529590 /* Extensions */,
 				DB8D2A462875D331006F19EB /* Storyboards */,
 				DB8D2A452875D313006F19EB /* Supporting */,
 				DB8D2A472875D352006F19EB /* Resources */,
@@ -108,6 +123,8 @@
 				DB233C832864A9E700CD3EEB /* ZoomAnimator.swift */,
 				DB233C8D2865709900CD3EEB /* ZoomTransition.swift */,
 				DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */,
+				DB21FFC12882C42800529590 /* AccessPhotoLibraryManager.swift */,
+				DB21FFC52883AB9900529590 /* PhotoManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -215,12 +232,15 @@
 				DB233C8B28655CA800CD3EEB /* ZoomViewController.swift in Sources */,
 				DB233C8E2865709900CD3EEB /* ZoomTransition.swift in Sources */,
 				DB233C7E28649E8500CD3EEB /* GalleryCollectionViewCell.swift in Sources */,
+				DB21FFC9288452BD00529590 /* Extension + CGSize.swift in Sources */,
 				DB233C7928649A6600CD3EEB /* GalleryViewController.swift in Sources */,
 				DB233C842864A9E700CD3EEB /* ZoomAnimator.swift in Sources */,
+				DB21FFC62883AB9900529590 /* PhotoManager.swift in Sources */,
 				DB233C812864A28600CD3EEB /* GalleryContainerViewController.swift in Sources */,
 				DB233C5B2864951100CD3EEB /* AppDelegate.swift in Sources */,
 				DB233C90286572BD00CD3EEB /* ZoomInteraction.swift in Sources */,
 				DB233C5D2864951100CD3EEB /* SceneDelegate.swift in Sources */,
+				DB21FFC22882C42800529590 /* AccessPhotoLibraryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

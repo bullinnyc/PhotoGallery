@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol GalleryContainerViewControllerDelegate: AnyObject {
     func containerViewController(_ viewController: GalleryContainerViewController, indexDidUpdate currentIndex: Int)
@@ -27,7 +28,8 @@ class GalleryContainerViewController: UIViewController {
     }
     
     // MARK: - Public Properties
-    var images: [UIImage]!
+    var fetchResult: PHFetchResult<PHAsset>!
+    var asset: PHAsset!
     var currentIndex = 0
     var callback: (() -> Void)!
     let transitionController = ZoomTransition()
@@ -104,7 +106,14 @@ class GalleryContainerViewController: UIViewController {
         
         zoomViewController.delegate = self
         zoomViewController.index = currentIndex
-        zoomViewController.image = images[currentIndex]
+        
+        PhotoManager.requestImage(
+            asset: asset,
+            targetSize: view.bounds.size.pixelSize,
+            contentMode: .aspectFit
+        ) { image in
+            zoomViewController.image = image
+        }
         
         pageViewController.delegate = self
         pageViewController.dataSource = self
@@ -176,23 +185,41 @@ extension GalleryContainerViewController: UIPageViewControllerDataSource {
         guard let zoomViewController = getZoomViewController() else { return nil }
         
         zoomViewController.delegate = self
-        zoomViewController.image = images[currentIndex - 1]
-        zoomViewController.index = currentIndex - 1
+        asset = fetchResult[currentIndex - 1]
         
+        PhotoManager.requestImage(
+            asset: asset,
+            targetSize: view.bounds.size.pixelSize,
+            contentMode: .aspectFit
+        ) { image in
+            zoomViewController.image = image
+        }
+        
+        zoomViewController.index = currentIndex - 1
         singleTapGesture.require(toFail: zoomViewController.zoomingTapGesture)
+        
         return zoomViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if currentIndex == images.count - 1 { return nil }
+        if currentIndex == fetchResult.count - 1 { return nil }
         
         guard let zoomViewController = getZoomViewController() else { return nil }
         
         zoomViewController.delegate = self
-        zoomViewController.image = images[currentIndex + 1]
-        zoomViewController.index = currentIndex + 1
+        asset = fetchResult[currentIndex + 1]
         
+        PhotoManager.requestImage(
+            asset: asset,
+            targetSize: view.bounds.size.pixelSize,
+            contentMode: .aspectFit
+        ) { image in
+            zoomViewController.image = image
+        }
+        
+        zoomViewController.index = currentIndex + 1
         singleTapGesture.require(toFail: zoomViewController.zoomingTapGesture)
+        
         return zoomViewController
     }
 }

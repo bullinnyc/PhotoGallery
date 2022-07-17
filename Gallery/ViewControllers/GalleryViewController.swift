@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import Photos
 
 class GalleryViewController: UIViewController {
     // MARK: - IB Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Private Properties
-    private var images: [UIImage] = []
+    private var fetchResult = PHFetchResult<PHAsset>()
     private var selectedIndexPath: IndexPath!
     private var sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private var rowsSpacing: CGFloat = 2
+    private var itemSize: CGSize!
     
     private var horizontalRowsCount: CGFloat {
         if UIDevice.current.orientation.isLandscape { return 5 }
@@ -73,7 +75,8 @@ class GalleryViewController: UIViewController {
             containerViewController.transitionController.toDelegate = containerViewController
             containerViewController.delegate = self
             containerViewController.currentIndex = selectedIndexPath.row
-            containerViewController.images = images
+            containerViewController.fetchResult = fetchResult
+            containerViewController.asset = fetchResult[selectedIndexPath.row]
             containerViewController.callback = {
                 self.selectedIndexPath = nil
             }
@@ -82,9 +85,18 @@ class GalleryViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        for number in 1..<19 {
-            guard let image = UIImage(named: "\(number)") else { return }
-            images.append(image)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(willEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+        
+        AccessPhotoLibraryManager.checkAccessPhotoLibrary(from: self) { [weak self] in
+            guard let self = self else { return }
+            
+            self.fetchResult = PhotoManager.fetchResult()
+            self.collectionView.reloadData()
         }
     }
     
@@ -101,6 +113,15 @@ class GalleryViewController: UIViewController {
             right: 0
         )
     }
+    
+    @objc private func willEnterForeground()  {
+        AccessPhotoLibraryManager.checkAccessPhotoLibrary(from: self) { [weak self] in
+            guard let self = self else { return }
+            
+            self.fetchResult = PhotoManager.fetchResult()
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Ext. UICollectionViewDataSource
@@ -110,7 +131,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return fetchResult.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,7 +140,18 @@ extension GalleryViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? GalleryCollectionViewCell else { fatalError() }
         
-        cell.imageView.image = images[indexPath.row]
+        let asset = fetchResult[indexPath.row]
+        
+        cell.asset = asset
+        
+        PhotoManager.requestImage(
+            asset: asset,
+            targetSize: itemSize.pixelSize,
+            contentMode: .aspectFill
+        ) { image in
+            cell.setImage(image: image, fromAsset: asset)
+        }
+        
         return cell
     }
 }
@@ -140,8 +172,9 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
         let availableWidth = collectionView.bounds.width - itemPadding - sumSectionInset
         let widthPerItem = availableWidth / horizontalRowsCount
         let heightPerItem = widthPerItem
+        itemSize = CGSize(width: widthPerItem, height: heightPerItem)
         
-        return CGSize(width: widthPerItem, height: heightPerItem)
+        return itemSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
