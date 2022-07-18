@@ -44,6 +44,8 @@ class GalleryViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
+        collectionView.collectionViewLayout.invalidateLayout()
+        
         view.frame = CGRect(
             origin: CGPoint(x: 0, y: 0),
             size: view.bounds.size
@@ -56,7 +58,6 @@ class GalleryViewController: UIViewController {
         
         setCollectionViewContentInsets()
         setScrollToItem()
-        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
