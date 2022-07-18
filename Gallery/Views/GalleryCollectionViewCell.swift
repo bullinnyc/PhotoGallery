@@ -21,7 +21,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Public Methods
     func setImage(image: UIImage?, fromAsset: PHAsset?) {
-        guard let asset = self.asset, let fromAsset = fromAsset else {
+        guard let asset = asset, let fromAsset = fromAsset else {
             imageView.image = nil
             return
         }
