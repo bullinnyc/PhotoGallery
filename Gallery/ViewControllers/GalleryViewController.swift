@@ -40,6 +40,7 @@ class GalleryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchResult = PhotoManager.fetchResult()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -98,6 +99,10 @@ class GalleryViewController: UIViewController {
             
             self.fetchResult = PhotoManager.fetchResult()
             self.collectionView.reloadData()
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionView.scrollToBottom(animated: false)
         }
     }
     
