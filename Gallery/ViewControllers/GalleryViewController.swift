@@ -40,7 +40,6 @@ class GalleryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchResult = PhotoManager.fetchResult()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
