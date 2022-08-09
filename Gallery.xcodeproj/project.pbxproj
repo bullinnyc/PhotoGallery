@@ -23,7 +23,6 @@
 		DB233C8B28655CA800CD3EEB /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8928655CA800CD3EEB /* ZoomViewController.swift */; };
 		DB233C8E2865709900CD3EEB /* ZoomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8D2865709900CD3EEB /* ZoomTransition.swift */; };
 		DB233C90286572BD00CD3EEB /* ZoomInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */; };
-		DB3269C8289FAEA700F69153 /* Extension + UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3269C7289FAEA700F69153 /* Extension + UIScrollView.swift */; };
 		DB8D2A492875D676006F19EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DB8D2A482875D676006F19EB /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		DB233C8928655CA800CD3EEB /* ZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
 		DB233C8D2865709900CD3EEB /* ZoomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransition.swift; sourceTree = "<group>"; };
 		DB233C8F286572BD00CD3EEB /* ZoomInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomInteraction.swift; sourceTree = "<group>"; };
-		DB3269C7289FAEA700F69153 /* Extension + UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIScrollView.swift"; sourceTree = "<group>"; };
 		DB8D2A482875D676006F19EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				DB21FFC8288452BD00529590 /* Extension + CGSize.swift */,
-				DB3269C7289FAEA700F69153 /* Extension + UIScrollView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -236,7 +233,6 @@
 				DB233C8E2865709900CD3EEB /* ZoomTransition.swift in Sources */,
 				DB233C7E28649E8500CD3EEB /* GalleryCollectionViewCell.swift in Sources */,
 				DB21FFC9288452BD00529590 /* Extension + CGSize.swift in Sources */,
-				DB3269C8289FAEA700F69153 /* Extension + UIScrollView.swift in Sources */,
 				DB233C7928649A6600CD3EEB /* GalleryViewController.swift in Sources */,
 				DB233C842864A9E700CD3EEB /* ZoomAnimator.swift in Sources */,
 				DB21FFC62883AB9900529590 /* PhotoManager.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol ZoomViewControllerDelegate: AnyObject {
     func zoomViewController(_ zoomViewController: ZoomViewController, scrollViewDidScroll scrollView: UIScrollView)
@@ -21,7 +22,12 @@ class ZoomViewController: UIViewController {
     @IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
-    var image: UIImage!
+    var asset: PHAsset! {
+        didSet {
+            setImage(image: nil, fromAsset: asset)
+        }
+    }
+    
     var index = 0
     
     weak var delegate: ZoomViewControllerDelegate!
@@ -52,18 +58,28 @@ class ZoomViewController: UIViewController {
         updateZoomScaleForSize(view.bounds.size)
     }
     
+    // MARK: - Public Methods
+    func setImage(image: UIImage?, fromAsset: PHAsset) {
+        guard asset.localIdentifier == fromAsset.localIdentifier else { return }
+        
+        if imageView != nil, let image = image {
+            imageView.image = image
+            imageView.frame = CGRect(
+                x: imageView.frame.origin.x,
+                y: imageView.frame.origin.y,
+                width: image.size.width,
+                height: image.size.height
+            )
+            
+            view.layoutIfNeeded()
+            view.setNeedsLayout()
+        }
+    }
+    
     // MARK: - Private Methods
     private func setupUI() {
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
-        
-        imageView.image = image
-        imageView.frame = CGRect(
-            x: imageView.frame.origin.x,
-            y: imageView.frame.origin.y,
-            width: image.size.width,
-            height: image.size.height
-        )
         
         imageView.addGestureRecognizer(zoomingTapGesture)
         imageView.isUserInteractionEnabled = true

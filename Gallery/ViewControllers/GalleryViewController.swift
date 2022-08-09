@@ -25,6 +25,21 @@ class GalleryViewController: UIViewController {
         return 3
     }
     
+    private var indexPathForLastItem: IndexPath? {
+        guard collectionView.numberOfSections > 0 else { return nil }
+        
+        for offset in 1 ... collectionView.numberOfSections {
+            let section = collectionView.numberOfSections - offset
+            let lastItem = collectionView.numberOfItems(inSection: section) - 1
+            
+            if lastItem >= 0 {
+                return IndexPath(item: lastItem, section: section)
+            }
+        }
+        
+        return nil
+    }
+    
     // MARK: - Deinitializers
     deinit {
         print("**** DEINIT: \(self)")
@@ -77,7 +92,6 @@ class GalleryViewController: UIViewController {
             containerViewController.delegate = self
             containerViewController.currentIndex = selectedIndexPath.row
             containerViewController.fetchResult = fetchResult
-            containerViewController.asset = fetchResult[selectedIndexPath.row]
             containerViewController.callback = {
                 self.selectedIndexPath = nil
             }
@@ -97,11 +111,10 @@ class GalleryViewController: UIViewController {
             guard let self = self else { return }
             
             self.fetchResult = PhotoManager.fetchResult()
-            self.collectionView.reloadData()
-        }
-        
-        DispatchQueue.main.async {
-            self.collectionView.scrollToBottom(animated: false)
+            
+            DispatchQueue.main.async {
+                self.scrollToLastItem(animated: false)
+            }
         }
     }
     
@@ -117,6 +130,11 @@ class GalleryViewController: UIViewController {
             bottom: tabBarHeight,
             right: 0
         )
+    }
+    
+    private func scrollToLastItem(at pos: UICollectionView.ScrollPosition = .bottom, animated: Bool = true) {
+        guard let indexPath = indexPathForLastItem else { return }
+        collectionView.scrollToItem(at: indexPath, at: pos, animated: animated)
     }
     
     @objc private func willEnterForeground()  {

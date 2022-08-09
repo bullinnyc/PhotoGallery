@@ -10,9 +10,12 @@ import Photos
 
 class PhotoManager {
     // MARK: - Private Properties
+    private static let imageManager = PHImageManager.default()
+    
     private static let requestOptions: PHImageRequestOptions = {
         let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .opportunistic
+        requestOptions.isNetworkAccessAllowed = true
         return requestOptions
     }()
     
@@ -36,7 +39,16 @@ class PhotoManager {
     }
     
     static func requestImage(asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode, completion: @escaping (UIImage) -> Void) {
-        PHImageManager.default().requestImage(
+        let requestOptions = requestOptions
+        requestOptions.progressHandler = { progress, error, stop, info in
+            if let error = error {
+                print(error)
+            } else {
+                print("Progress download from iCloud Photo Library: \(progress)")
+            }
+        }
+        
+        imageManager.requestImage(
             for: asset,
             targetSize: targetSize,
             contentMode: contentMode,
@@ -47,7 +59,7 @@ class PhotoManager {
         }
     }
     
-    static func fetchPhotos(limitedPhotos count: Int = 0, targetSize: CGSize, contentMode: PHImageContentMode, completion: @escaping ([UIImage]) -> Void) {
+    static func requestLimitedImages(with count: Int = 0, targetSize: CGSize, contentMode: PHImageContentMode, completion: @escaping ([UIImage]) -> Void) {
         var images: [UIImage] = []
         
         let fetchResult = fetchResult()
@@ -61,7 +73,7 @@ class PhotoManager {
         : fetchResult.count
         
         for index in 0..<iterationCount {
-            PHImageManager.default().requestImage(
+            imageManager.requestImage(
                 for: fetchResult.object(at: index) as PHAsset,
                 targetSize: targetSize,
                 contentMode: contentMode,

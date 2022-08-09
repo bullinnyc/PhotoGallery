@@ -13,19 +13,14 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Public Properties
-    var asset: PHAsset? {
+    var asset: PHAsset! {
         didSet {
             setImage(image: nil, fromAsset: asset)
         }
     }
     
     // MARK: - Public Methods
-    func setImage(image: UIImage?, fromAsset: PHAsset?) {
-        guard let asset = asset, let fromAsset = fromAsset else {
-            imageView.image = nil
-            return
-        }
-        
+    func setImage(image: UIImage?, fromAsset: PHAsset) {
         guard asset.localIdentifier == fromAsset.localIdentifier else { return }
         imageView.image = image
     }
