@@ -25,21 +25,6 @@ class GalleryViewController: UIViewController {
         return 3
     }
     
-    private var indexPathForLastItem: IndexPath? {
-        guard collectionView.numberOfSections > 0 else { return nil }
-        
-        for offset in 1 ... collectionView.numberOfSections {
-            let section = collectionView.numberOfSections - offset
-            let lastItem = collectionView.numberOfItems(inSection: section) - 1
-            
-            if lastItem >= 0 {
-                return IndexPath(item: lastItem, section: section)
-            }
-        }
-        
-        return nil
-    }
-    
     // MARK: - Deinitializers
     deinit {
         print("**** DEINIT: \(self)")
@@ -133,8 +118,8 @@ class GalleryViewController: UIViewController {
     }
     
     private func scrollToLastItem(at pos: UICollectionView.ScrollPosition = .bottom, animated: Bool = true) {
-        guard let indexPath = indexPathForLastItem else { return }
-        collectionView.scrollToItem(at: indexPath, at: pos, animated: animated)
+        let indexPathForLastItem = IndexPath(item: fetchResult.count - 1, section: 0)
+        collectionView.scrollToItem(at: indexPathForLastItem, at: pos, animated: animated)
     }
     
     @objc private func willEnterForeground()  {
