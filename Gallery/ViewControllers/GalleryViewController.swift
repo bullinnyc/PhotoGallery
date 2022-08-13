@@ -85,18 +85,15 @@ class GalleryViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(willEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+        // Observing Changes in the Photo Library
+        PHPhotoLibrary.shared().register(self)
         
         AccessPhotoLibraryManager.checkAccessPhotoLibrary(from: self) { [weak self] in
             guard let self = self else { return }
-            
+
             self.fetchResult = PhotoManager.fetchResult()
-            
+            self.collectionView.reloadData()
+
             DispatchQueue.main.async {
                 self.scrollToLastItem(animated: false)
             }
@@ -120,15 +117,6 @@ class GalleryViewController: UIViewController {
     private func scrollToLastItem(at pos: UICollectionView.ScrollPosition = .bottom, animated: Bool = true) {
         let indexPathForLastItem = IndexPath(item: fetchResult.count - 1, section: 0)
         collectionView.scrollToItem(at: indexPathForLastItem, at: pos, animated: animated)
-    }
-    
-    @objc private func willEnterForeground()  {
-        AccessPhotoLibraryManager.checkAccessPhotoLibrary(from: self) { [weak self] in
-            guard let self = self else { return }
-            
-            self.fetchResult = PhotoManager.fetchResult()
-            self.collectionView.reloadData()
-        }
     }
 }
 
@@ -300,5 +288,17 @@ extension GalleryViewController: ZoomAnimatorDelegate {
         ) as? GalleryCollectionViewCell else { return nil }
         
         return cell
+    }
+}
+
+// MARK: - Ext. PHPhotoLibraryChangeObserver
+extension GalleryViewController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        guard let changeResults = changeInstance.changeDetails(for: fetchResult) else { return }
+        
+        fetchResult = changeResults.fetchResultAfterChanges
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
